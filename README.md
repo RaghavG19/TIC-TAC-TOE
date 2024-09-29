@@ -1,42 +1,34 @@
- Calculator Documentation
+Tic Tac Toe Documentation
  
 
  Introduction
-The calculator is a web-based tool that allows users to perform basic arithmetic operations and trigonometric functions. It provides a simple and intuitive interface for users to input expressions and obtain results instantly.
+Tic Tac Toe is a classic two-player game where players take turns marking cells in a grid with their symbols ('X' or 'O') with the objective of forming a line of three consecutive symbols.
 
- Features
-- Basic arithmetic operations: addition, subtraction, multiplication, and division.
-- Trigonometric functions: sine, cosine, and tangent.
-- Clear button to reset the input field.
-- Backspace button to delete the last character entered.
-- Responsive design for optimal viewing and interaction across devices.
+ Game Description
+In this version of Tic Tac Toe, players can click on cells in a 3x3 grid to place their symbol. The game automatically detects wins or ties and declares the result accordingly. It provides an interactive and intuitive interface for players to enjoy the game.
 
  HTML Structure
-The calculator interface is structured using HTML elements, including text input fields and buttons. The layout is designed to be visually appealing and user-friendly, with appropriate spacing and styling for ease of use.
+The game interface consists of a grid layout created using HTML buttons. Each button represents a cell in the game board. The HTML structure is designed to provide a visually appealing and responsive layout for a seamless gaming experience.
 
  CSS Styling
-CSS styles are applied to enhance the appearance of the calculator interface. The styling includes background colors, button designs, animations for transitions, and responsive layout adjustments. The design choices aim to create a modern and attractive user interface.
+CSS styles are applied to create the layout and appearance of the game interface. The styling includes grid layout properties, cell appearance, animations for result display, and responsive design for different screen sizes. The visual elements enhance the overall user experience and make the game more engaging.
 
  JavaScript Functions
-JavaScript functions are used to handle user interactions and perform calculations based on input expressions. These functions enable dynamic updating of the input field and provide real-time feedback to the user. The calculator logic ensures accurate computation and error handling for invalid inputs.
+ `startGame`
+- Initializes the game by setting up event listeners for cell clicks.
 
- `handleButtonClick`
-- Event listener function that responds to button clicks and updates the input field accordingly.
+ `checkWinner`
+- Checks for a winning combination after each move.
 
- `evaluateExpression`
-- Function to evaluate the input expression and compute the result using JavaScript's `eval` function.
+ `declareWinner`
+- Declares the winner or a tie and displays the result message.
 
- `clearInput`
-- Function to clear the input field when the "Ac" (All Clear) button is clicked.
-
- `deleteCharacter`
-- Function to delete the last character entered in the input field when the backspace button is clicked.
-
- `calculateTrigonometric`
-- Functions to calculate trigonometric functions (sine, cosine, tangent) of the input angle in degrees.
+ `resetGame`
+- Resets the game after a win or tie.
 
  Event Listeners
-Event listeners are attached to each button element to capture user clicks and trigger the corresponding actions. These listeners ensure that user interactions are properly handled and processed by the calculator logic.
+Event listeners are used to trigger game functions when players interact with the game interface. These listeners enable smooth gameplay and ensure that player actions are appropriately handled within the game logic.
 
  Conclusion
-The calculator provides a convenient and efficient tool for performing arithmetic and trigonometric calculations. With its responsive design, intuitive interface, and accurate computation capabilities, users can quickly obtain results and carry out mathematical operations with ease. Whether for simple calculations or complex trigonometric functions, the calculator offers a versatile solution for various mathematical tasks.
+This Tic Tac Toe game provides a simple and enjoyable way to play the classic game online. With its intuitive interface, automatic result detection, and responsive design, players can enjoy a seamless gaming experience across different devices. Whether playing against a friend or testing their skills against the computer, players can immerse themselves in the timeless fun of Tic Tac Toe.
+
