@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tic Tac Toe</title>
+    <style>
+     .result {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.9);
+    border: 2px solid #000;
+    border-radius: 10px;
+    font-size: 24px;
+    animation-duration: 1s;
+    animation-fill-mode: forwards;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translate(-50%, 50%);
+    }
+    to {
+        opacity: 1;
+        transform: translate(-50%, -50%);
+    }
+}
+
+.animate__fadeInUp {
+    animation-name: fadeInUp;
+}
+
+.container {
+            display: grid;
+            grid-template-columns: repeat(3, 100px);
+            grid-template-rows: repeat(3, 100px);
+            gap: 5px;
+            width: 320px;
+            margin: auto;
+        }
+        .cell {
+            font-size: 2em;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #ddd;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h1>Tic Tac Toe</h1>
+    <div class="container">
+        <button class="cell" data-index="0"></button>
+        <button class="cell" data-index="1"></button>
+        <button class="cell" data-index="2"></button>
+        <button class="cell" data-index="3"></button>
+        <button class="cell" data-index="4"></button>
+        <button class="cell" data-index="5"></button>
+        <button class="cell" data-index="6"></button>
+        <button class="cell" data-index="7"></button>
+        <button class="cell" data-index="8"></button>
+    </div>
+    <script src="script.js"></script>
+</body>
+<script>
+// Define the initial player and an empty tic-tac-toe board
+let currentPlayer = 'X';
+const board = ['', '', '', '', '', '', '', '', ''];
+
+// Function to start the game
+function startGame() {
+    // Select all elements with the class 'cell'
+    const buttons = document.querySelectorAll('.cell');
+    // Loop through each cell/button
+    buttons.forEach(button => {
+        // Add click event listener to each cell/button
+        button.addEventListener('click', () => {
+            // Check if the cell is empty
+            if (!button.textContent) {
+                // Update the cell with the current player's symbol
+                button.textContent = currentPlayer;
+                // Update the game board array with the current player's symbol
+                board[button.dataset.index] = currentPlayer;
+                // Check if there is a winner after each move
+                const winner = checkWinner();
+                // If there is a winner, declare the winner; otherwise, switch players
+                if (winner) {
+                    declareWinner(winner);
+                } else {
+                    currentPlayer = currentPlayer === 'X' ? 'O' : 'X';
+                }
+            }
+        });
+    });
+}
+
+// Function to check if there is a winner
+function checkWinner() {
+    // Define all possible winning combinations
+    const winningCombinations = [
+        [0, 1, 2], [3, 4, 5], [6, 7, 8], // Rows
+        [0, 3, 6], [1, 4, 7], [2, 5, 8], // Columns
+        [0, 4, 8], [2, 4, 6]             // Diagonals
+    ];
+
+    // Loop through each winning combination
+    for (const combination of winningCombinations) {
+        const [a, b, c] = combination;
+        // Check if the same symbol exists in the cells of a winning combination
+        if (board[a] && board[a] === board[b] && board[a] === board[c]) {
+            // If there is a winner, return the winning symbol
+            return board[a];
+        }
+    }
+
+    // If all cells are filled and there is no winner, return 'tie'
+    if (!board.includes('')) {
+        return 'tie';
+    }
+
+    // If the game is still ongoing, return null
+    return null;
+}
+
+// Function to declare the winner or tie
+function declareWinner(winner) {
+    // Create a message based on the winner or tie
+    const message = winner === 'tie' ? "It's a tie!" : `${winner} wins!`;
+    // Create a result div element
+    const resultDiv = document.createElement('div');
+    // Set the text content of the result div
+    resultDiv.textContent = message;
+    // Add a class to the result div
+    resultDiv.classList.add('result');
+    // Append the result div to the document body
+    document.body.appendChild(resultDiv);
+
+    // Add animation classes to the result div
+    resultDiv.classList.add('animate__animated', 'animate__fadeInUp');
+
+    // Set a timeout to reset the game and remove the result div after 3 seconds
+    setTimeout(() => {
+        resetGame();
+        resultDiv.classList.remove('animate__fadeInUp');
+        document.body.removeChild(resultDiv);
+    }, 3000);
+}
+
+// Function to reset the game
+function resetGame() {
+    // Select all elements with the class 'cell'
+    const buttons = document.querySelectorAll('.cell');
+    // Loop through each cell/button
+    buttons.forEach(button => {
+        // Clear the text content of each cell/button
+        button.textContent = '';
+    });
+    // Reset the current player to 'X'
+    currentPlayer = 'X';
+    // Clear the game board array
+    board.fill('');
+}
+
+// Event listener to start the game when the DOM content is loaded
+document.addEventListener('DOMContentLoaded', () => {
+    startGame();
+});
+
+
+</script>
+</html>
